@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEGIT PANEL V4 - PRO EDITION</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap');
+
+        body {
+            background-color: #050505;
+            color: #e0e0e0;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: linear-gradient(rgba(255, 0, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 0, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            background-color: #000;
+            padding: 25px;
+            border: 2px solid #ff0000;
+            width: 400px;
+            box-shadow: 0 0 35px rgba(255, 0, 0, 0.5);
+            position: relative;
+        }
+
+        h2 { 
+            margin: 0 0 20px 0;
+            color: #ff0000; 
+            text-transform: uppercase;
+            text-shadow: 0 0 15px #ff0000;
+            font-size: 22px;
+            text-align: center;
+        }
+        
+        input[type="password"], select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #444;
+            background: #111;
+            color: #ff0000;
+            font-family: 'Orbitron', sans-serif;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .btn-main {
+            width: 100%;
+            padding: 15px;
+            background-color: #ff0000;
+            border: none;
+            color: #000;
+            font-weight: 900;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        .btn-main:hover { 
+            background-color: #fff;
+            box-shadow: 0 0 20px #fff;
+        }
+
+        .hidden { display: none; }
+
+        .function-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 0, 0, 0.08);
+            border-left: 4px solid #ff0000;
+        }
+
+        .red-text { color: #ff0000; font-weight: bold; text-shadow: 0 0 5px #ff0000; }
+
+        input[type="range"] { 
+            width: 100%; 
+            accent-color: #ff0000;
+            cursor: pointer;
+        }
+
+        #fov-val { color: #ff0000; font-size: 18px; font-weight: bold; }
+
+        #injection-status {
+            margin-top: 15px;
+            min-height: 30px;
+            font-size: 14px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .applying { color: #00ff00; text-shadow: 0 0 8px #00ff00; animation: blink 0.8s infinite; }
+
+        .injected-rgb {
+            font-size: 1.4em;
+            font-weight: 900;
+            animation: rgbText 1s infinite linear;
+            letter-spacing: 1px;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+        @keyframes rgbText {
+            0% { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
+            33% { color: #00ff00; text-shadow: 0 0 10px #00ff00; }
+            66% { color: #0000ff; text-shadow: 0 0 10px #0000ff; }
+            100% { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
+        }
+
+        .scroll-area {
+            max-height: 420px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .scroll-area::-webkit-scrollbar { width: 4px; }
+        .scroll-area::-webkit-scrollbar-thumb { background: #ff0000; }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen" class="container">
+        <h2>System Login</h2>
+        <input type="password" id="passInput" placeholder="ENTER ACCESS_CODE">
+        <button class="btn-main" onclick="checkPassword()">Decrypt</button>
+        <p id="error-msg" style="color: #ff0000; font-size: 11px; margin-top: 10px; text-align: center;"></p>
+    </div>
+
+    <div id="dashboard" class="container hidden">
+        <h2 id="welcome-msg">DASHBOARD</h2>
+        
+        <div class="scroll-area">
+            <div class="function-item">
+                <span>Auxílio Básico</span>
+                <input type="checkbox" class="opt-check">
+            </div>
+
+            <div class="function-item">
+                <span class="red-text">Capa 25%</span>
+                <input type="checkbox" class="opt-check">
+            </div>
+
+            <div class="function-item">
+                <span>Calibrar Mira</span>
+                <input type="checkbox" class="opt-check">
+            </div>
+
+            <div style="background: #111; padding: 10px; margin: 10px 0; border: 1px solid #333;">
+                <div style="display: flex; justify-content: space-between;">
+                    <span>FOV VIEW</span>
+                    <span id="fov-val">50°</span>
+                </div>
+                <input type="range" id="fov-slider" min="0" max="100" value="50" oninput="updateFOV(this.value)">
+            </div>
+
+            <div id="pro-features" class="hidden">
+                <div class="function-item" style="border-left-color: #fff; background: rgba(255, 255, 255, 0.05);">
+                    <span class="red-text" style="color: #ff3333; font-size: 1.1em;">Capa 50% (ULTRA)</span>
+                    <input type="checkbox" class="opt-check">
+                </div>
+
+                <div class="function-item">
+                    <span>Aimbot (Auto-Head)</span>
+                    <input type="checkbox" class="opt-check">
+                </div>
+
+                <div class="function-item">
+                    <span>Ghost Mode</span>
+                    <input type="checkbox" class="opt-check">
+                </div>
+
+                <div class="function-item">
+                    <span>Otimização FPS</span>
+                    <input type="checkbox" class="opt-check">
+                </div>
+
+                <div style="background: #111; padding: 10px; margin: 10px 0; border: 1px solid #333;">
+                    <span style="display:block; margin-bottom: 5px; color: #ff0000; font-size: 12px;">Driver de Gráficos (iPhone)</span>
+                    <select>
+                        <option>Render iPhone 12 Pro</option>
+                        <option>Render iPhone 13 Pro</option>
+                        <option>Render iPhone 14 Pro</option>
+                        <option>Render iPhone 15 Pro Max</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button id="btn-inject" class="btn-main" style="margin-top: 20px; background: transparent; border: 1px solid #ff0000; color: #ff0000;" onclick="startInjection()">INJETAR SCRIPT</button>
+        
+        <div id="injection-status"></div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const pass = document.getElementById('passInput').value;
+            const login = document.getElementById('login-screen');
+            const dash = document.getElementById('dashboard');
+            const pro = document.getElementById('pro-features');
+            const fovSlider = document.getElementById('fov-slider');
+            
+            if (pass === "legitbase") {
+                login.classList.add('hidden');
+                dash.classList.remove('hidden');
+                document.getElementById('welcome-msg').innerText = "BASE ACCESS";
+                fovSlider.max = 100;
+                fovSlider.value = 50;
+                updateFOV(50);
+            } 
+            else if (pass === "legitpro") {
+                login.classList.add('hidden');
+                dash.classList.remove('hidden');
+                pro.classList.remove('hidden');
+                document.getElementById('welcome-msg').innerText = "PRO OVERRIDE";
+                fovSlider.max = 360;
+                fovSlider.value = 360;
+                updateFOV(360);
+            } 
+            else {
+                document.getElementById('error-msg').innerText = "FATAL ERROR: ACCESS DENIED";
+                document.getElementById('passInput').value = "";
+            }
+        }
+
+        function updateFOV(val) {
+            document.getElementById('fov-val').innerText = val + "°";
+        }
+
+        function startInjection() {
+            const status = document.getElementById('injection-status');
+            const btn = document.getElementById('btn-inject');
+            const checks = document.querySelectorAll('.opt-check:checked');
+            
+            btn.disabled = true;
+            btn.style.borderColor = "#444";
+            btn.style.color = "#444";
+            
+            status.innerHTML = '<span class="applying">Aplicando opções...</span>';
+
+            // Tempo de injeção dinâmico (2s a 5s)
+            let time = 2000 + (checks.length * 450);
+            if (time > 5000) time = 5000;
+
+            setTimeout(() => {
+                status.innerHTML = '<span class="injected-rgb">INJETADO COM SUCESSO!</span>';
+                
+                // Resetar o botão após um tempo para nova injeção
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.style.borderColor = "#ff0000";
+                    btn.style.color = "#ff0000";
+                }, 3000);
+            }, time);
+        }
+    </script>
+</body>
+</html>
